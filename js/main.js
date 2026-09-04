@@ -94,8 +94,51 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileOverlay.addEventListener('click', () => toggleMobileMenu(false));
   }
 
+  const smoothScrollToTarget = (targetId) => {
+    if (!targetId || targetId === '#') return;
+    const targetElement = document.querySelector(targetId);
+    if (!targetElement) return;
+
+    const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 70;
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    window.scrollTo({
+      top: Math.max(0, offsetPosition),
+      behavior: 'smooth',
+    });
+  };
+
   mobileLinks.forEach((link) => {
-    link.addEventListener('click', () => toggleMobileMenu(false));
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      toggleMobileMenu(false);
+      
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        setTimeout(() => {
+          smoothScrollToTarget(href);
+        }, 60);
+      }
+    });
+  });
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]:not(.mobile-nav-link)').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (href && href.length > 1) {
+        e.preventDefault();
+        smoothScrollToTarget(href);
+      }
+    });
+  });
+
+  // Handle window resize to reset mobile menu state
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 768 && mobileDrawer && mobileDrawer.classList.contains('open')) {
+      toggleMobileMenu(false);
+    }
   });
 
   /* ==========================================

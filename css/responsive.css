@@ -61,13 +61,20 @@
     gap: 1.75rem;
   }
 
-  .project-card-primary,
-  .project-card-secondary {
-    grid-template-columns: 1fr;
+  .projects-editorial-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
   }
 
+  .project-card,
+  .project-card-primary,
+  .project-card-secondary,
   .project-card-half {
-    grid-column: span 12;
+    width: 100%;
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
   }
 
   .career-grid {
@@ -90,6 +97,10 @@
     --header-height: 64px;
   }
 
+  section[id] {
+    scroll-margin-top: calc(var(--header-height) + 10px);
+  }
+
   /* Navigation */
   .nav-links,
   .nav-cta-btn {
@@ -102,6 +113,15 @@
 
   .mobile-menu-toggle {
     display: flex;
+    z-index: 1100;
+  }
+
+  .mobile-nav-drawer {
+    width: 85%;
+    max-width: 340px;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    max-height: 100dvh !important;
   }
 
   /* Hero Mobile Redesign */
@@ -119,7 +139,7 @@
 
   /* Right Hero Panel on Mobile (Photo Banner) */
   .hero-right {
-    height: 380px;
+    height: clamp(340px, 48vh, 420px);
     width: 100%;
     overflow: hidden;
     position: relative;
@@ -136,7 +156,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 15%;
+    object-position: center 8%;
     display: block;
   }
 
@@ -284,22 +304,29 @@
 
   /* Projects on Mobile */
   .projects-editorial-grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.75rem !important;
+    width: 100% !important;
   }
 
+  .project-card,
   .project-card-primary,
-  .project-card-secondary {
-    grid-template-columns: 1fr;
-  }
-
+  .project-card-secondary,
   .project-card-half {
-    grid-column: span 1;
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    grid-column: auto !important;
+    box-sizing: border-box !important;
   }
 
   .project-visual {
+    width: 100% !important;
+    min-height: auto !important;
     padding: 1.75rem 1.25rem;
-    min-height: 200px;
+    box-sizing: border-box !important;
   }
 
   .project-info {
