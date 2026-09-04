@@ -38,29 +38,55 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      2. SCROLLSPY (ACTIVE NAV INDICATOR)
      ========================================== */
+  const spyTargetIds = [
+    'hero',
+    'about',
+    'skills',
+    'work',
+    'experience',
+    'education',
+    'achievements',
+    'certifications',
+    'platforms',
+    'contact',
+  ];
+  const spyTargets = spyTargetIds
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+
+  let isProgrammaticScrolling = false;
+  let scrollTimeout = null;
+
+  const setActiveNavLink = (targetId) => {
+    if (!targetId) return;
+    const cleanId = targetId.startsWith('#') ? targetId.slice(1) : targetId;
+    navLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${cleanId}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  };
+
   const scrollSpyObserver = new IntersectionObserver(
     (entries) => {
+      if (isProgrammaticScrolling) return;
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           const id = entry.target.getAttribute('id');
-          navLinks.forEach((link) => {
-            const href = link.getAttribute('href');
-            if (href === `#${id}`) {
-              link.classList.add('active');
-            } else {
-              link.classList.remove('active');
-            }
-          });
+          setActiveNavLink(id);
         }
       });
     },
     {
-      rootMargin: '-30% 0px -60% 0px',
+      rootMargin: '-20% 0px -50% 0px',
       threshold: 0,
     }
   );
 
-  sections.forEach((section) => scrollSpyObserver.observe(section));
+  spyTargets.forEach((target) => scrollSpyObserver.observe(target));
 
   /* ==========================================
      3. MOBILE DRAWER NAVIGATION
@@ -99,6 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetElement = document.querySelector(targetId);
     if (!targetElement) return;
 
+    isProgrammaticScrolling = true;
+    clearTimeout(scrollTimeout);
+    setActiveNavLink(targetId);
+
     const headerHeight = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')) || 70;
     const elementPosition = targetElement.getBoundingClientRect().top;
     const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
@@ -107,6 +137,10 @@ document.addEventListener('DOMContentLoaded', () => {
       top: Math.max(0, offsetPosition),
       behavior: 'smooth',
     });
+
+    scrollTimeout = setTimeout(() => {
+      isProgrammaticScrolling = false;
+    }, 800);
   };
 
   mobileLinks.forEach((link) => {

@@ -258,7 +258,9 @@ button {
   transition: all var(--transition-fast);
 }
 
-section[id] {
+section[id],
+#experience,
+#education {
   scroll-margin-top: calc(var(--header-height) + 16px);
 }
 
