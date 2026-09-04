@@ -3,6 +3,23 @@
  * Minimalist, high performance, robust navigation & transitions
  */
 
+import * as Sentry from "@sentry/react";
+
+// Initialize Sentry error monitoring
+Sentry.init({
+  dsn: "https://1cbb1642eb4d011d2c4a766f466c19c1@o4511978138435584.ingest.de.sentry.io/4512029930094672",
+  dataCollection: {
+    // To disable sending user data and HTTP bodies, uncomment the lines below:
+    // userInfo: false,
+    // httpBodies: []
+  },
+});
+
+// Helper for testing Sentry integration from browser console
+window.testSentryError = () => {
+  throw new Error("This is your first error!");
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('js-reveal');
   
