@@ -15,9 +15,13 @@ Sentry.init({
   },
 });
 
-// Helper for testing Sentry integration from browser console
+// Expose Sentry and test function globally
+window.Sentry = Sentry;
 window.testSentryError = () => {
-  throw new Error("This is your first error!");
+  const err = new Error("This is your first error!");
+  Sentry.captureException(err);
+  console.log("Sentry event sent!");
+  throw err;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
