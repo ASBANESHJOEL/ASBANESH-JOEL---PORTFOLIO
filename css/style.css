@@ -1837,12 +1837,17 @@ button {
 
 /* --- SUBTLE ENTRANCE / REVEAL ANIMATIONS --- */
 .fade-in-up {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
 
-.fade-in-up.visible {
+.js-reveal .fade-in-up {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+.js-reveal .fade-in-up.visible {
   opacity: 1;
   transform: translateY(0);
 }

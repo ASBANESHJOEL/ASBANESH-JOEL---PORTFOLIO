@@ -4,6 +4,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  document.documentElement.classList.add('js-reveal');
+  
   // Elements
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
