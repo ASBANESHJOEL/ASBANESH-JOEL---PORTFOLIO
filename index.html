@@ -7,15 +7,89 @@
   <meta name="description" content="Portfolio of Asbanesh Joel D — Machine Learning Engineer specializing in intelligent solutions, predictive modeling, and applied AI systems.">
   <meta name="author" content="Asbanesh Joel D">
   <meta name="theme-color" content="#0D0E11">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://asbanesh-joel-portfolio.vercel.app/">
 
   <!-- Open Graph / Social Sharing Meta -->
   <meta property="og:title" content="Asbanesh Joel D — Machine Learning Engineer">
   <meta property="og:description" content="Building intelligent, practical solutions with machine learning, AI, and modern software technologies.">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://asbanesh-joel-portfolio.vercel.app/">
+  <meta property="og:site_name" content="Asbanesh Joel D Portfolio">
+  <meta property="og:locale" content="en_IN">
+  <meta property="og:image" content="https://asbanesh-joel-portfolio.vercel.app/assets/images/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Asbanesh Joel D — Machine Learning Engineer portfolio">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Asbanesh Joel D — Machine Learning Engineer">
+  <meta name="twitter:description" content="Building intelligent, practical solutions with machine learning, AI, and modern software technologies.">
+  <meta name="twitter:image" content="https://asbanesh-joel-portfolio.vercel.app/assets/images/og-image.jpg">
+  <meta name="twitter:image:alt" content="Asbanesh Joel D — Machine Learning Engineer portfolio">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap">
+
+  <link rel="preload" as="image" href="assets/images/hero_composite_clean_2x.webp" type="image/webp" media="(min-width: 769px)">
+  <link rel="preload" as="image" href="assets/images/hero_mobile_visual.webp" type="image/webp" media="(max-width: 768px)">
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/responsive.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://asbanesh-joel-portfolio.vercel.app/#website",
+        "url": "https://asbanesh-joel-portfolio.vercel.app/",
+        "name": "Asbanesh Joel D Portfolio",
+        "description": "Portfolio of Asbanesh Joel D — Machine Learning Engineer specializing in intelligent solutions, predictive modeling, and applied AI systems.",
+        "inLanguage": "en-IN"
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://asbanesh-joel-portfolio.vercel.app/#profile",
+        "url": "https://asbanesh-joel-portfolio.vercel.app/",
+        "name": "Asbanesh Joel D — Machine Learning Engineer",
+        "isPartOf": { "@id": "https://asbanesh-joel-portfolio.vercel.app/#website" },
+        "mainEntity": { "@id": "https://asbanesh-joel-portfolio.vercel.app/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://asbanesh-joel-portfolio.vercel.app/#person",
+        "name": "Asbanesh Joel D",
+        "jobTitle": "Machine Learning Engineer",
+        "email": "asbaneshjoel2006@gmail.com",
+        "url": "https://asbanesh-joel-portfolio.vercel.app/",
+        "image": "https://asbanesh-joel-portfolio.vercel.app/assets/images/og-image.jpg",
+        "sameAs": [
+          "https://www.linkedin.com/in/asbaneshjoel/",
+          "https://github.com/ASBANESHJOEL",
+          "https://huggingface.co/ASBANESHJOEL",
+          "https://www.kaggle.com/asbaneshjoel",
+          "https://leetcode.com/u/ASBANESH_JOEL/",
+          "https://www.hackerrank.com/profile/asbaneshjoel2006"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "Panimalar Engineering College, Chennai"
+        },
+        "knowsAbout": [
+          "Machine Learning",
+          "Deep Learning",
+          "Python",
+          "Artificial Intelligence",
+          "Predictive Modeling"
+        ]
+      }
+    ]
+  }
+  </script>
 
   <!-- Favicon / SVG -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90' font-weight='900' font-family='sans-serif' fill='%23000'>A</text></svg>">
@@ -53,7 +127,7 @@
         </a>
 
         <!-- Mobile Menu Toggle Button -->
-        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileNavDrawer">
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
           <span class="hamburger-line"></span>
@@ -144,12 +218,18 @@
         <!-- Right: Approved Reference Composite Artwork with Mobile Art Direction -->
         <div class="hero-right">
           <picture>
+            <source media="(max-width: 768px)" type="image/webp" srcset="assets/images/hero_mobile_visual.webp">
             <source media="(max-width: 768px)" srcset="assets/images/hero_mobile_visual.png">
+            <source type="image/webp" srcset="assets/images/hero_composite_clean_2x.webp">
             <img 
               src="assets/images/hero_composite_clean_2x.png" 
               alt="Asbanesh Joel D — Machine Learning Engineer" 
               class="hero-composite-img" 
               id="heroCompositeImg"
+              width="1254"
+              height="1254"
+              fetchpriority="high"
+              decoding="async"
             >
           </picture>
         </div>
@@ -693,7 +773,7 @@
                 <span class="cert-issuer">Codec Technologies</span>
               </div>
             </div>
-            <button class="cert-view-btn" data-cert-name="Artificial Intelligence Internship — Codec Technologies" data-cert-preview="assets/images/certificates/CODEC AI INTERNSHIP.png" data-cert-url="assets/docs/certificates/CODEC AI INTERNSHIP.pdf">
+            <button type="button" class="cert-view-btn" data-cert-name="Artificial Intelligence Internship — Codec Technologies" data-cert-preview="assets/images/certificates/CODEC AI INTERNSHIP.png" data-cert-url="assets/docs/certificates/CODEC AI INTERNSHIP.pdf">
               <span>VIEW CERTIFICATE</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -711,7 +791,7 @@
                 <span class="cert-issuer">TANSAM</span>
               </div>
             </div>
-            <button class="cert-view-btn" data-cert-name="AI/ML Internship — TANSAM" data-cert-preview="assets/images/certificates/TANSAM certificate.png" data-cert-url="assets/docs/certificates/TANSAM certificate.pdf">
+            <button type="button" class="cert-view-btn" data-cert-name="AI/ML Internship — TANSAM" data-cert-preview="assets/images/certificates/TANSAM certificate.png" data-cert-url="assets/docs/certificates/TANSAM certificate.pdf">
               <span>VIEW CERTIFICATE</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -729,7 +809,7 @@
                 <span class="cert-issuer">Microsoft</span>
               </div>
             </div>
-            <button class="cert-view-btn" data-cert-name="Machine Learning — Microsoft" data-cert-preview="assets/images/certificates/Machine Learning by Microsoft.png" data-cert-url="assets/docs/certificates/Machine Learning by Microsoft.pdf">
+            <button type="button" class="cert-view-btn" data-cert-name="Machine Learning — Microsoft" data-cert-preview="assets/images/certificates/Machine Learning by Microsoft.png" data-cert-url="assets/docs/certificates/Machine Learning by Microsoft.pdf">
               <span>VIEW CERTIFICATE</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -747,7 +827,7 @@
                 <span class="cert-issuer">Great Learning</span>
               </div>
             </div>
-            <button class="cert-view-btn" data-cert-name="Python for Machine Learning — Great Learning" data-cert-preview="assets/images/certificates/Python for ML.png" data-cert-url="assets/docs/certificates/Python for ML.pdf">
+            <button type="button" class="cert-view-btn" data-cert-name="Python for Machine Learning — Great Learning" data-cert-preview="assets/images/certificates/Python for ML.png" data-cert-url="assets/docs/certificates/Python for ML.pdf">
               <span>VIEW CERTIFICATE</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -765,7 +845,7 @@
                 <span class="cert-issuer">Infosys</span>
               </div>
             </div>
-            <button class="cert-view-btn" data-cert-name="Basics of Python — Infosys" data-cert-preview="assets/images/certificates/Basic of Python by INFOSYS.png" data-cert-url="assets/docs/certificates/Basic of Python by INFOSYS.pdf">
+            <button type="button" class="cert-view-btn" data-cert-name="Basics of Python — Infosys" data-cert-preview="assets/images/certificates/Basic of Python by INFOSYS.png" data-cert-url="assets/docs/certificates/Basic of Python by INFOSYS.pdf">
               <span>VIEW CERTIFICATE</span>
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <line x1="7" y1="17" x2="17" y2="7"></line>
@@ -1014,7 +1094,7 @@
   <!-- ==========================================================================
        13. CERTIFICATE PREVIEW MODAL
        ========================================================================== -->
-  <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle">
+  <div class="cert-modal" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalTitle" aria-hidden="true">
     <div class="cert-modal-box">
       <div class="cert-modal-header">
         <h3 class="cert-modal-title" id="certModalTitle">Certificate Preview</h3>

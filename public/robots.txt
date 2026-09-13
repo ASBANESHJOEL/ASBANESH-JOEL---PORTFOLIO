@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://asbanesh-joel-portfolio.vercel.app/sitemap.xml

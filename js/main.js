@@ -3,7 +3,7 @@
  * Minimalist, high performance, robust navigation & transitions
  */
 
-import * as Sentry from "@sentry/react";
+import * as Sentry from "@sentry/browser";
 
 // Initialize Sentry error monitoring
 Sentry.init({
@@ -15,22 +15,12 @@ Sentry.init({
   },
 });
 
-// Expose Sentry and test function globally
-window.Sentry = Sentry;
-window.testSentryError = () => {
-  const err = new Error("This is your first error!");
-  Sentry.captureException(err);
-  console.log("Sentry event sent!");
-  throw err;
-};
-
 document.addEventListener('DOMContentLoaded', () => {
   document.documentElement.classList.add('js-reveal');
   
   // Elements
   const header = document.querySelector('.site-header');
   const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-  const sections = document.querySelectorAll('section[id]');
   const menuToggle = document.getElementById('mobileMenuToggle');
   const mobileDrawer = document.getElementById('mobileNavDrawer');
   const mobileOverlay = document.getElementById('mobileNavOverlay');
@@ -232,6 +222,8 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      6. CERTIFICATE VIEWER MODAL
      ========================================== */
+  const mainContent = document.querySelector('main');
+
   const openCertModal = (name, previewUrl, pdfUrl) => {
     if (!certModal) return;
     certModalTitle.textContent = name;
@@ -249,7 +241,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (previewUrl) {
       const img = document.createElement('img');
       img.src = previewUrl;
-      img.alt = name;
+      img.alt = `${name} certificate preview`;
+      img.loading = 'lazy';
+      img.decoding = 'async';
       img.className = 'cert-modal-img';
       img.onerror = () => {
         img.style.display = 'none';
@@ -286,12 +280,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     certModalBody.appendChild(container);
     certModal.classList.add('active');
+    certModal.setAttribute('aria-hidden', 'false');
+    if (mainContent) {
+      mainContent.setAttribute('aria-hidden', 'true');
+    }
     document.body.style.overflow = 'hidden';
+    if (certModalClose) {
+      certModalClose.focus();
+    }
   };
 
   const closeCertModal = () => {
     if (!certModal) return;
     certModal.classList.remove('active');
+    certModal.setAttribute('aria-hidden', 'true');
+    if (mainContent) {
+      mainContent.removeAttribute('aria-hidden');
+    }
     document.body.style.overflow = '';
     certModalBody.innerHTML = '';
   };

@@ -3,9 +3,6 @@
    Design System: Minimalist Editorial, Black/White/Charcoal, Precision Geometry
    ========================================================================== */
 
-/* --- GOOGLE FONTS IMPORT --- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Caveat:wght@500;600&display=swap');
-
 /* --- DESIGN TOKENS --- */
 :root {
   /* Foundations */
@@ -353,6 +350,18 @@ section[id],
   color: var(--accent-white);
   padding-left: 0.75rem;
   border-left: 3px solid var(--accent-white);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.site-header a:focus-visible,
+.contact-section a:focus-visible,
+.mobile-nav-drawer a:focus-visible {
+  outline-color: var(--accent-white);
 }
 
 /* --- HERO SECTION --- */
