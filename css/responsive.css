@@ -655,14 +655,14 @@
   }
 
   .platforms-carousel-arrow {
-    top: auto;
-    bottom: 0;
+    top: 50%;
+    bottom: auto;
     width: 38px;
     height: 38px;
   }
 
-  .platforms-carousel-arrow.is-prev { left: calc(50% - 54px); }
-  .platforms-carousel-arrow.is-next { right: calc(50% - 54px); }
+  .platforms-carousel-arrow.is-prev { left: -0.25rem; }
+  .platforms-carousel-arrow.is-next { right: -0.25rem; }
 
   .platforms-carousel-pagination {
     margin-top: 0.85rem;
