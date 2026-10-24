@@ -1953,8 +1953,8 @@ button:focus-visible {
   position: absolute;
   top: 18px;
   left: 50%;
-  width: clamp(225px, 23vw, 285px);
-  height: 330px;
+  width: clamp(270px, 27vw, 340px);
+  height: 360px;
   margin: 0;
   padding: 1.8rem;
   overflow: hidden;
