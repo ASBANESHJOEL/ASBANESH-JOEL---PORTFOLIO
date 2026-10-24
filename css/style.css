@@ -2054,6 +2054,11 @@ button:focus-visible {
   transform: translateX(0) scale(1);
 }
 
+.platforms-carousel.is-arrows-visible .platforms-carousel-arrow:hover,
+.platforms-carousel:has(:focus-visible) .platforms-carousel-arrow:hover {
+  transform: translateX(0) scale(1.05);
+}
+
 .platforms-carousel-arrow:hover {
   background: #252a33;
   border-color: rgba(242, 245, 250, 0.8);
