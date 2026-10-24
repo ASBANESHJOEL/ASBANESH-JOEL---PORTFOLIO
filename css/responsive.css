@@ -605,3 +605,83 @@
   }
 }
 
+
+
+/* --- 3D TECHNOLOGIES CAROUSEL RESPONSIVE LAYOUT --- */
+@media (max-width: 900px) {
+  .platforms-carousel {
+    padding-right: 2.2rem;
+    padding-left: 2.2rem;
+  }
+
+  .platforms-carousel-viewport {
+    height: 390px;
+  }
+
+  #platformsCarouselTrack .platform-card {
+    width: 245px;
+    height: 320px;
+    padding: 1.5rem;
+  }
+
+  .platforms-carousel-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .platforms-carousel {
+    margin-top: 1.5rem;
+    padding: 0 0 0.5rem;
+  }
+
+  .platforms-carousel-viewport {
+    height: 370px;
+    perspective: 1000px;
+    perspective-origin: 50% 45%;
+  }
+
+  #platformsCarouselTrack .platform-card {
+    top: 18px;
+    width: min(72vw, 255px);
+    height: 315px;
+    padding: 1.4rem;
+  }
+
+  #platformsCarouselTrack .platform-card .platform-usage {
+    font-size: 0.8rem;
+  }
+
+  .platforms-carousel-arrow {
+    top: auto;
+    bottom: 0;
+    width: 38px;
+    height: 38px;
+  }
+
+  .platforms-carousel-arrow.is-prev { left: calc(50% - 54px); }
+  .platforms-carousel-arrow.is-next { right: calc(50% - 54px); }
+
+  .platforms-carousel-pagination {
+    margin-top: 0.85rem;
+  }
+
+  .platforms-carousel-hint {
+    margin-top: 0.65rem;
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .platforms-carousel-viewport {
+    height: 355px;
+  }
+
+  #platformsCarouselTrack .platform-card {
+    width: 225px;
+    height: 305px;
+    padding: 1.2rem;
+  }
+}
