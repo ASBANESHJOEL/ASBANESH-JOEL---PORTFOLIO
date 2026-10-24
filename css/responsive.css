@@ -619,8 +619,8 @@
   }
 
   #platformsCarouselTrack .platform-card {
-    width: 245px;
-    height: 320px;
+    width: 290px;
+    height: 340px;
     padding: 1.5rem;
   }
 
@@ -645,8 +645,8 @@
 
   #platformsCarouselTrack .platform-card {
     top: 18px;
-    width: min(72vw, 255px);
-    height: 315px;
+    width: min(80vw, 290px);
+    height: 325px;
     padding: 1.4rem;
   }
 
@@ -680,7 +680,7 @@
   }
 
   #platformsCarouselTrack .platform-card {
-    width: 225px;
+    width: min(82vw, 250px);
     height: 305px;
     padding: 1.2rem;
   }
