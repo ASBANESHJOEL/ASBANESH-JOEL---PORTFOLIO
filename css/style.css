@@ -2030,7 +2030,28 @@ button:focus-visible {
   font-size: 1.6rem;
   line-height: 1;
   cursor: pointer;
-  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateX(0) scale(0.96);
+  transition: opacity 220ms ease, visibility 220ms ease, background-color 180ms ease, border-color 180ms ease, transform 220ms ease;
+}
+
+.platforms-carousel.is-arrows-visible .platforms-carousel-arrow,
+.platforms-carousel:focus-within .platforms-carousel-arrow {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.platforms-carousel-arrow.is-prev { transform: translateX(-8px) scale(1); }
+.platforms-carousel-arrow.is-next { transform: translateX(8px) scale(1); }
+
+.platforms-carousel.is-arrows-visible .platforms-carousel-arrow.is-prev,
+.platforms-carousel:focus-within .platforms-carousel-arrow.is-prev,
+.platforms-carousel.is-arrows-visible .platforms-carousel-arrow.is-next,
+.platforms-carousel:focus-within .platforms-carousel-arrow.is-next {
+  transform: translateX(0) scale(1);
 }
 
 .platforms-carousel-arrow:hover {
