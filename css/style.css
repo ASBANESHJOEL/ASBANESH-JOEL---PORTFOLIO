@@ -2303,3 +2303,136 @@ button:focus-visible {
   border-color: #d8d8d8 !important;
   color: #222 !important;
 }
+
+
+/* --- EXACT REFERENCE PANEL COLORS & ORDER --- */
+.projects-editorial-grid > .project-card-primary .project-visual {
+  background-color: #0d0f12 !important;
+  color: #fff !important;
+}
+.projects-editorial-grid > .project-card-primary .project-visual-bg-pattern {
+  opacity: .55;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.035) 1px, transparent 1px);
+}
+.projects-editorial-grid > .project-card-primary .project-visual-watermark {
+  color: rgba(255,255,255,.045);
+}
+.projects-editorial-grid > .project-card-primary .project-visual-header,
+.projects-editorial-grid > .project-card-primary .project-diagram,
+.projects-editorial-grid > .project-card-primary .project-tech-tags { color: #fff; }
+.projects-editorial-grid > .project-card-primary .project-index { color: #73777e; }
+.projects-editorial-grid > .project-card-primary .project-badge-pill {
+  background: #292b30;
+  border-color: #50535a;
+  color: #fff;
+}
+.projects-editorial-grid > .project-card-primary .project-diagram {
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.08);
+}
+.projects-editorial-grid > .project-card-primary .diagram-node {
+  background: #222429;
+  border-color: #393c42;
+  color: #fff;
+}
+.projects-editorial-grid > .project-card-primary .diagram-node.active {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}
+.projects-editorial-grid > .project-card-primary .diagram-connector { background: #777; }
+.projects-editorial-grid > .project-card-primary .diagram-connector::after { color: #aaa; }
+.projects-editorial-grid > .project-card-primary .project-visual .tech-tag {
+  background: #222429 !important;
+  border-color: #393c42 !important;
+  color: #fff !important;
+}
+.projects-editorial-grid > .project-card-primary .project-info {
+  background: #f7f8fa !important;
+  color: #111 !important;
+}
+.projects-editorial-grid > .project-card-primary .project-info .project-category-tag { color: #5e6878; }
+.projects-editorial-grid > .project-card-primary .project-info .project-title { color: #08090b; }
+.projects-editorial-grid > .project-card-primary .project-info .project-desc,
+.projects-editorial-grid > .project-card-primary .project-info .contribution-text { color: #374151; }
+.projects-editorial-grid > .project-card-primary .project-info .project-contribution-box {
+  background: #fff;
+  border-color: #e0e3e8;
+  border-left-color: #111;
+}
+.projects-editorial-grid > .project-card-primary .project-info .contribution-label { color: #111; }
+.projects-editorial-grid > .project-card-primary .project-info .tech-tag {
+  color: #222;
+  background: #fff;
+  border-color: #dfe3e8;
+}
+.projects-editorial-grid > .project-card-primary .project-info .project-links { border-color: #e5e7eb; }
+.projects-editorial-grid > .project-card-primary .project-info .project-link-btn { color: #111; }
+.projects-editorial-grid > .project-card-primary .project-info .project-link-btn.primary {
+  background: #08090b;
+  color: #fff;
+  border-color: #08090b;
+}
+
+/* Projects 03 & 04: black diagram/metadata on top, white project content below */
+.projects-editorial-grid > .project-card-stacked {
+  display: flex;
+  flex-direction: column;
+  background: #f7f8fa;
+  min-width: 0;
+}
+.projects-editorial-grid > .project-card-stacked .project-visual {
+  order: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  padding: 1.5rem;
+  background: #0d0f12;
+  color: #fff;
+}
+.projects-editorial-grid > .project-card-stacked .project-info {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 2rem;
+  background: #f7f8fa;
+  color: #111;
+}
+.projects-editorial-grid > .project-card-stacked .project-info .project-category-tag { color: #5e6878; }
+.projects-editorial-grid > .project-card-stacked .project-info .project-title { color: #08090b; }
+.projects-editorial-grid > .project-card-stacked .project-info .project-desc { color: #374151; }
+.projects-editorial-grid > .project-card-stacked .project-info .tech-tag {
+  color: #222;
+  background: #fff;
+  border-color: #dfe3e8;
+}
+.projects-editorial-grid > .project-card-stacked .project-info .project-links {
+  margin-top: 2rem;
+  border-color: #e5e7eb;
+}
+.projects-editorial-grid > .project-card-stacked .project-info .project-link-btn { color: #111; }
+.projects-editorial-grid > .project-card-stacked .project-info .project-link-btn.primary {
+  background: #08090b;
+  color: #fff;
+  border-color: #08090b;
+}
+.projects-editorial-grid > .project-card-stacked .project-visual .project-diagram {
+  margin: auto 0;
+  background: rgba(255,255,255,.025);
+  border-color: rgba(255,255,255,.08);
+}
+.projects-editorial-grid > .project-card-stacked .project-visual .diagram-node {
+  background: #222429;
+  border-color: #393c42;
+  color: #fff;
+}
+.projects-editorial-grid > .project-card-stacked .project-visual .diagram-node.active {
+  background: #fff;
+  border-color: #fff;
+  color: #111;
+}
+.projects-editorial-grid > .project-card-stacked .project-visual .diagram-connector { background: #777; }
+.projects-editorial-grid > .project-card-stacked .project-visual .diagram-connector::after { color: #aaa; }
