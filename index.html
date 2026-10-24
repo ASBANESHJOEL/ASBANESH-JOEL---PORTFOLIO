@@ -433,6 +433,57 @@
             </div>
           </article>
 
+          <!-- Life-Link: AI-Powered Emergency Medical Resource Network -->
+          <article class="project-card project-card-secondary fade-in-up" id="projectLifeLink">
+            <div class="project-info">
+              <div>
+                <span class="project-category-tag">AI / MACHINE LEARNING / FULL-STACK SYSTEM</span>
+                <h3 class="project-title">Life-Link</h3>
+                <p class="project-desc">
+                  An AI-powered emergency medical resource network connecting hospitals, blood banks, and donors to coordinate critical blood resources. Includes donor eligibility and ranking, dispatch workflows, inventory reservations, peer transfers, notifications, and dispatch tracking.
+                </p>
+                <div class="project-tech-tags">
+                  <span class="tech-tag">Python</span>
+                  <span class="tech-tag">Machine Learning</span>
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Node.js</span>
+                  <span class="tech-tag">Express</span>
+                  <span class="tech-tag">Supabase</span>
+                </div>
+              </div>
+              <div class="project-links">
+                <a href="https://www.life-link.in/" target="_blank" rel="noopener noreferrer" class="project-link-btn primary">
+                  <span>LIVE PROJECT ↗</span>
+                </a>
+                <a href="https://github.com/ASBANESHJOEL/LIFE-LINK-AI-Powered-Emergency-Medical-Resource-Network" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                  <span>GITHUB ↗</span>
+                </a>
+              </div>
+            </div>
+            <div class="project-visual">
+              <div class="project-visual-bg-pattern"></div>
+              <div class="project-visual-watermark">LL</div>
+              <div class="project-visual-header">
+                <span class="project-index">FEATURED PROJECT</span>
+                <span class="project-badge-pill">EMERGENCY RESOURCE NETWORK</span>
+              </div>
+              <div class="project-diagram">
+                <div class="diagram-nodes">
+                  <div class="diagram-node">Hospital Request</div>
+                  <div class="diagram-connector"></div>
+                  <div class="diagram-node active">Donor Ranking &amp; Dispatch</div>
+                  <div class="diagram-connector"></div>
+                  <div class="diagram-node">Blood Resource Coordination</div>
+                </div>
+              </div>
+              <div class="project-tech-tags" style="margin-bottom: 0;">
+                <span class="tech-tag" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #FFF;">ML-Enabled Workflows</span>
+                <span class="tech-tag" style="background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.15); color: #FFF;">Live Deployment</span>
+              </div>
+            </div>
+          </article>
+
           <!-- Project 2: AI-BASED HOUSE RENT ESTIMATION SYSTEM -->
           <article class="project-card project-card-secondary fade-in-up" id="projectRent">
             <div class="project-info">
@@ -867,7 +918,12 @@
         <span class="section-label">PRACTICAL STACK</span>
         <h2 class="section-heading">TECHNOLOGIES &amp; PLATFORMS</h2>
 
-        <div class="platforms-grid">
+        <div class="platforms-carousel" id="platformsCarousel">
+          <button class="platforms-carousel-arrow is-prev" type="button" aria-label="Show previous technology" data-carousel-prev>
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="platforms-carousel-viewport" id="platformsCarouselViewport" tabindex="0" aria-label="Technology cards carousel. Use left and right arrow keys to rotate.">
+            <div class="platforms-grid" id="platformsCarouselTrack">
           <!-- Python -->
           <div class="platform-card fade-in-up">
             <div class="platform-card-top">
@@ -952,18 +1008,18 @@
             <p class="platform-usage">PostgreSQL database management, API endpoints, and scalable backend infrastructure for projects.</p>
           </div>
 
-          <!-- Firebase -->
+          <!-- Render -->
           <div class="platform-card fade-in-up">
             <div class="platform-card-top">
               <div class="platform-icon-wrap">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M4.618 17.514L1.037 10.87c-.352-.653-.105-1.468.55-1.821.205-.11.436-.168.67-.168.455 0 .882.217 1.15.584l3.15 4.304 4.195-7.877c.338-.636 1.134-.875 1.77-.537.243.129.438.334.555.586l8.835 16.518-8.68 4.908c-.735.415-1.644.415-2.378 0l-5.61-3.176-.244-.141z"/>
+                <svg viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Render">
+                  <text x="12" y="19" text-anchor="middle" font-family="Arial, sans-serif" font-size="21" font-weight="800">R</text>
                 </svg>
               </div>
-              <span class="platform-pill">CLOUD</span>
+              <span class="platform-pill">CLOUD PLATFORM</span>
             </div>
-            <h3 class="platform-name">Firebase</h3>
-            <p class="platform-usage">Authentication services, real-time database management, and cloud application integration.</p>
+            <h3 class="platform-name">Render</h3>
+            <p class="platform-usage">Deploying web services, static sites, background workers, and production applications with managed cloud infrastructure.</p>
           </div>
 
           <!-- Vercel -->
@@ -980,6 +1036,20 @@
             <p class="platform-usage">Deploying performant frontend web applications with automated continuous deployment pipelines.</p>
           </div>
 
+          <!-- Jira -->
+          <div class="platform-card fade-in-up">
+            <div class="platform-card-top">
+              <div class="platform-icon-wrap">
+                <svg viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Jira">
+                  <path d="M11.53 2c0 2.48 2.01 4.49 4.49 4.49h1.16v1.12c0 2.48 2.01 4.49 4.49 4.49V2H11.53zM5.66 7.78c0 2.48 2.01 4.49 4.49 4.49h1.16v1.12c0 2.48 2.01 4.49 4.49 4.49V7.78H5.66zM0 13.56c0 2.48 2.01 4.49 4.49 4.49h1.16v1.12c0 2.48 2.01 4.49 4.49 4.49V13.56H0z"/>
+                </svg>
+              </div>
+              <span class="platform-pill">PROJECT MANAGEMENT</span>
+            </div>
+            <h3 class="platform-name">Jira</h3>
+            <p class="platform-usage">Tracking tasks and issues, organizing project work, and managing agile workflows and team progress.</p>
+          </div>
+
           <!-- MongoDB -->
           <div class="platform-card fade-in-up">
             <div class="platform-card-top">
@@ -993,6 +1063,13 @@
             <h3 class="platform-name">MongoDB</h3>
             <p class="platform-usage">NoSQL document database design, flexible collection schemas, and unstructured data storage for applications.</p>
           </div>
+            </div>
+          </div>
+          <button class="platforms-carousel-arrow is-next" type="button" aria-label="Show next technology" data-carousel-next>
+            <span aria-hidden="true">→</span>
+          </button>
+          <div class="platforms-carousel-pagination" id="platformsCarouselPagination" aria-label="Choose a technology"></div>
+          <p class="platforms-carousel-hint">Drag to rotate <span aria-hidden="true">·</span> Use arrows <span aria-hidden="true">·</span> Swipe on mobile</p>
         </div>
       </div>
     </section>
