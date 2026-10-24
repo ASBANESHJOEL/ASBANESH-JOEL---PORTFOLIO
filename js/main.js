@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const viewportWidth = platformsViewport.clientWidth;
       const cardWidth = platformCards[0].getBoundingClientRect().width || Math.min(340, Math.max(260, viewportWidth * 0.27));
-      const sideOffset = Math.min(cardWidth * 0.9 + 22, viewportWidth * 0.36);
+      const sideOffset = Math.min(cardWidth * 0.84 + 24, viewportWidth * 0.34);
 
       platformCards.forEach((card, index) => {
         // Only render the active card and its immediate neighbors. A 10-face
@@ -68,10 +68,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const isActive = offset === 0;
         const side = offset < 0 ? -1 : 1;
         const x = isActive ? 0 : side * sideOffset;
-        const rotate = isActive ? 0 : side * -18;
-        const scale = isActive ? 1 : 0.88;
+        const rotate = isActive ? 0 : side * -26;
+        const scale = isActive ? 1 : 0.92;
+        const depth = isActive ? 42 : -88;
 
-        card.style.transform = `translateX(calc(-50% + ${x}px)) translateZ(${isActive ? 0 : -70}px) rotateY(${rotate}deg) scale(${scale})`;
+        // Keep the center panel forward while the side panels turn away in 3D.
+        // This restores the curved, cinematic stage without placing hidden cards in the same perspective cone.
+        card.style.transform = `translateX(calc(-50% + ${x}px)) translateZ(${depth}px) rotateY(${rotate}deg) scale(${scale})`;
         card.style.opacity = visible ? '1' : '0';
         card.style.visibility = visible ? 'visible' : 'hidden';
         card.style.pointerEvents = visible ? 'auto' : 'none';
