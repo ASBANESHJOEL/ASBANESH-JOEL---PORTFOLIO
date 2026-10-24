@@ -632,6 +632,14 @@
 }
 
 @media (max-width: 600px) {
+  /* Touchscreens have no hover edge, so keep navigation arrows available. */
+  .platforms-carousel-arrow {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
   .platforms-carousel {
     margin-top: 1.5rem;
     padding: 0 0 0.5rem;
