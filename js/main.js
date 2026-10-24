@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousButton = platformsCarousel.querySelector('[data-carousel-prev]');
     const nextButton = platformsCarousel.querySelector('[data-carousel-next]');
     let activePlatformIndex = 0;
+    let rotationStepCount = 0;
     let pointerStartX = null;
     let pointerStartY = null;
     let pointerMoved = false;
@@ -53,38 +54,27 @@ document.addEventListener('DOMContentLoaded', () => {
       const count = platformCards.length;
       if (!count) return;
 
-      const viewportWidth = platformsViewport.clientWidth;
-      const cardWidth = platformCards[0].getBoundingClientRect().width || Math.min(340, Math.max(260, viewportWidth * 0.27));
-      const sideOffset = Math.min(cardWidth * 0.84 + 24, viewportWidth * 0.34);
+      const step = 360 / count;
+      const cardWidth = platformCards[0].getBoundingClientRect().width || 340;
+      const gap = 26;
+      // Chord spacing keeps the physical width of each panel plus a real gap
+      // around the full ring, instead of clamping the radius and forcing overlap.
+      const radius = Math.max(300, (cardWidth + gap) / (2 * Math.sin((step * Math.PI) / 360)));
 
       platformCards.forEach((card, index) => {
-        // Only render the active card and its immediate neighbors. A 10-face
-        // ring puts many rear cards through the same perspective cone, causing
-        // the overlapping slivers seen in the preview. Three stable slots avoid that.
-        let offset = (index - activePlatformIndex + count) % count;
-        if (offset > count / 2) offset -= count;
-
-        const visible = Math.abs(offset) <= 1;
-        const isActive = offset === 0;
-        const side = offset < 0 ? -1 : 1;
-        const x = isActive ? 0 : side * sideOffset;
-        const rotate = isActive ? 0 : side * -26;
-        const scale = isActive ? 1 : 0.92;
-        const depth = isActive ? 42 : -88;
-
-        // Keep the center panel forward while the side panels turn away in 3D.
-        // This restores the curved, cinematic stage without placing hidden cards in the same perspective cone.
-        card.style.transform = `translateX(calc(-50% + ${x}px)) translateZ(${depth}px) rotateY(${rotate}deg) scale(${scale})`;
-        card.style.opacity = visible ? '1' : '0';
-        card.style.visibility = visible ? 'visible' : 'hidden';
-        card.style.pointerEvents = visible ? 'auto' : 'none';
-        card.style.zIndex = isActive ? '3' : '2';
-        card.classList.toggle('is-active', isActive);
-        card.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        card.style.transform = `translateX(-50%) rotateY(${index * step}deg) translateZ(${radius}px)`;
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.style.zIndex = 'auto';
+        card.classList.toggle('is-active', index === activePlatformIndex);
+        card.setAttribute('aria-hidden', 'false');
         card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${count}`);
       });
 
-      platformsTrack.style.transform = 'none';
+      // Rotate the entire ring as one object. Keep the accumulated angle so
+      // crossing the last/first card never resets the animation to zero.
+      platformsTrack.style.transform = `rotateY(${-rotationStepCount * step}deg)`;
 
       platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
         if (index === activePlatformIndex) {
@@ -97,6 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const advancePlatform = (direction) => {
       if (!platformCards.length) return;
+      rotationStepCount += direction;
       activePlatformIndex = (activePlatformIndex + direction + platformCards.length) % platformCards.length;
       renderPlatformCarousel();
     };
