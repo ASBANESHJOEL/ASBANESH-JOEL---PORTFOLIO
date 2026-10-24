@@ -120,6 +120,30 @@ document.addEventListener('DOMContentLoaded', () => {
     previousButton?.addEventListener('click', () => advancePlatform(-1));
     nextButton?.addEventListener('click', () => advancePlatform(1));
 
+    // Reveal navigation only when the pointer approaches either edge of the carousel.
+    const edgeRevealWidth = 120;
+    platformsViewport.addEventListener('pointermove', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const bounds = platformsViewport.getBoundingClientRect();
+      const nearEdge = event.clientX - bounds.left <= edgeRevealWidth
+        || bounds.right - event.clientX <= edgeRevealWidth;
+      platformsCarousel.classList.toggle('is-arrows-visible', nearEdge);
+    });
+
+    platformsViewport.addEventListener('pointerleave', () => {
+      platformsCarousel.classList.remove('is-arrows-visible');
+    });
+
+    // Keep controls visible while keyboard users focus them.
+    platformsCarousel.addEventListener('focusin', () => {
+      platformsCarousel.classList.add('is-arrows-visible');
+    });
+    platformsCarousel.addEventListener('focusout', (event) => {
+      if (!platformsCarousel.contains(event.relatedTarget)) {
+        platformsCarousel.classList.remove('is-arrows-visible');
+      }
+    });
+
     platformsViewport.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
