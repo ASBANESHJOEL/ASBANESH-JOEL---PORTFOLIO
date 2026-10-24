@@ -49,25 +49,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let pointerStartY = null;
     let pointerMoved = false;
 
-    const getShortestOffset = (index) => {
-      const count = platformCards.length;
-      return ((index - activePlatformIndex + count + count / 2) % count + count) % count - count / 2;
-    };
-
     const renderPlatformCarousel = () => {
       if (!platformCards.length) return;
 
       const step = 360 / platformCards.length;
       const radius = Math.min(430, Math.max(230, platformsViewport.clientWidth * 0.43));
 
+      // Keep each card fixed on the 3D ring and rotate the ring as one unit.
+      // This avoids per-card transform/stacking-order jumps during animation.
       platformCards.forEach((card, index) => {
-        const offset = getShortestOffset(index);
-        const angle = offset * step;
-        card.style.transform = `translateX(-50%) rotateY(${angle}deg) translateZ(${radius}px)`;
-        card.style.zIndex = String(20 - Math.round(Math.abs(offset)));
+        card.style.transform = `translateX(-50%) rotateY(${index * step}deg) translateZ(${radius}px)`;
         card.classList.toggle('is-active', index === activePlatformIndex);
         card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${platformCards.length}`);
       });
+
+      platformsTrack.style.transform = `rotateY(${-activePlatformIndex * step}deg)`;
 
       platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
         if (index === activePlatformIndex) {
