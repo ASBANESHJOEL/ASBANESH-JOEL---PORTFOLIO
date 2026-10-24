@@ -2071,9 +2071,9 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-/* Put the controls clearly beyond the card silhouette, not on the outer panels. */
-.platforms-carousel-arrow.is-prev { left: -3.75rem; }
-.platforms-carousel-arrow.is-next { right: -3.75rem; }
+/* Keep controls just outside the side-card silhouettes, not at the browser's far edges. */
+.platforms-carousel-arrow.is-prev { left: -2.5rem; }
+.platforms-carousel-arrow.is-next { right: -2.5rem; }
 
 .platforms-carousel-pagination {
   display: flex;
