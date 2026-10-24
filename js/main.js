@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================================
      0. TECHNOLOGIES 3D CAROUSEL
      ========================================== */
+  const platformsSection = document.getElementById('platforms');
   const platformsCarousel = document.getElementById('platformsCarousel');
   const platformsViewport = document.getElementById('platformsCarouselViewport');
   const platformsTrack = document.getElementById('platformsCarouselTrack');
