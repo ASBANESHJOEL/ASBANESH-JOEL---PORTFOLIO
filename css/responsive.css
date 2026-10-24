@@ -722,3 +722,11 @@
   .project-card-stacked .project-half-header,
   .project-card-stacked .project-half-content { padding: 1.25rem; }
 }
+
+
+/* Keep Project 02's white content panel wider than its black visual on tablet/desktop. */
+@media (min-width: 769px) {
+  .projects-editorial-grid > #projectEduhive {
+    grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr) !important;
+  }
+}
