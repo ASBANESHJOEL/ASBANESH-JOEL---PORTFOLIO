@@ -45,37 +45,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousButton = platformsCarousel.querySelector('[data-carousel-prev]');
     const nextButton = platformsCarousel.querySelector('[data-carousel-next]');
     let activePlatformIndex = 0;
-    // Monotonic step count keeps the ring rotating in one direction across the last/first boundary.
-    let rotationStepCount = 0;
     let pointerStartX = null;
     let pointerStartY = null;
     let pointerMoved = false;
 
     const renderPlatformCarousel = () => {
-      if (!platformCards.length) return;
+      const count = platformCards.length;
+      if (!count) return;
 
-      const step = 360 / platformCards.length;
-      // Size the ring from the card width so neighboring cards keep a visible gap.
-      // The chord between adjacent cards is 2 * radius * sin(step / 2).
-      const cardWidth = platformCards[0]?.getBoundingClientRect().width || 260;
-      const gap = 18;
-      const radiusForGap = (cardWidth + gap) / (2 * Math.sin((step * Math.PI) / 360));
-      // Do not clamp the radius: with 9–10 cards that forces the ring chord
-      // below the card width, causing adjacent faces to overlap and look collapsed.
-      const radius = Math.max(230, radiusForGap);
+      const viewportWidth = platformsViewport.clientWidth;
+      const cardWidth = Math.min(285, Math.max(225, viewportWidth * 0.23));
+      const sideOffset = Math.min(cardWidth * 0.98, viewportWidth * 0.34);
 
-      // Keep each card fixed on the 3D ring and rotate the ring as one unit.
-      // This avoids per-card transform/stacking-order jumps during animation.
       platformCards.forEach((card, index) => {
-        card.style.transform = `translateX(-50%) rotateY(${index * step}deg) translateZ(${radius}px)`;
-        card.classList.toggle('is-active', index === activePlatformIndex);
-        card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${platformCards.length}`);
+        // Only render the active card and its immediate neighbors. A 10-face
+        // ring puts many rear cards through the same perspective cone, causing
+        // the overlapping slivers seen in the preview. Three stable slots avoid that.
+        let offset = (index - activePlatformIndex + count) % count;
+        if (offset > count / 2) offset -= count;
+
+        const visible = Math.abs(offset) <= 1;
+        const isActive = offset === 0;
+        const side = offset < 0 ? -1 : 1;
+        const x = isActive ? 0 : side * sideOffset;
+        const rotate = isActive ? 0 : side * -18;
+        const scale = isActive ? 1 : 0.88;
+
+        card.style.transform = `translateX(calc(-50% + ${x}px)) translateZ(${isActive ? 0 : -70}px) rotateY(${rotate}deg) scale(${scale})`;
+        card.style.opacity = visible ? '1' : '0';
+        card.style.visibility = visible ? 'visible' : 'hidden';
+        card.style.pointerEvents = visible ? 'auto' : 'none';
+        card.style.zIndex = isActive ? '3' : '2';
+        card.classList.toggle('is-active', isActive);
+        card.setAttribute('aria-hidden', visible ? 'false' : 'true');
+        card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${count}`);
       });
 
-      // Keep the angle bounded while preserving the unwrapped step count.
-      // A full turn is visually identical, but very large angles lose transform precision.
-      const visualStepCount = ((rotationStepCount % platformCards.length) + platformCards.length) % platformCards.length;
-      platformsTrack.style.transform = `rotateY(${-visualStepCount * step}deg)`;
+      platformsTrack.style.transform = 'none';
 
       platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
         if (index === activePlatformIndex) {
@@ -88,7 +94,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const advancePlatform = (direction) => {
       if (!platformCards.length) return;
-      rotationStepCount += direction;
       activePlatformIndex = (activePlatformIndex + direction + platformCards.length) % platformCards.length;
       renderPlatformCarousel();
     };
