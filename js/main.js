@@ -58,9 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
       // Size the ring from the card width so neighboring cards keep a visible gap.
       // The chord between adjacent cards is 2 * radius * sin(step / 2).
       const cardWidth = platformCards[0]?.getBoundingClientRect().width || 260;
-      const gap = 28;
+      const gap = 18;
       const radiusForGap = (cardWidth + gap) / (2 * Math.sin((step * Math.PI) / 360));
-      const radius = Math.max(230, Math.min(560, radiusForGap));
+      // Do not clamp the radius: with 9–10 cards that forces the ring chord
+      // below the card width, causing adjacent faces to overlap and look collapsed.
+      const radius = Math.max(230, radiusForGap);
 
       // Keep each card fixed on the 3D ring and rotate the ring as one unit.
       // This avoids per-card transform/stacking-order jumps during animation.
@@ -70,7 +72,10 @@ document.addEventListener('DOMContentLoaded', () => {
         card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${platformCards.length}`);
       });
 
-      platformsTrack.style.transform = `rotateY(${-rotationStepCount * step}deg)`;
+      // Keep the angle bounded while preserving the unwrapped step count.
+      // A full turn is visually identical, but very large angles lose transform precision.
+      const visualStepCount = ((rotationStepCount % platformCards.length) + platformCards.length) % platformCards.length;
+      platformsTrack.style.transform = `rotateY(${-visualStepCount * step}deg)`;
 
       platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
         if (index === activePlatformIndex) {
