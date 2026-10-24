@@ -2037,7 +2037,8 @@ button:focus-visible {
   transition: opacity 220ms ease, visibility 220ms ease, background-color 180ms ease, border-color 180ms ease, transform 220ms ease;
 }
 
-.platforms-carousel.is-arrows-visible .platforms-carousel-arrow,
+.platforms-carousel.is-prev-arrow-visible .platforms-carousel-arrow.is-prev,
+.platforms-carousel.is-next-arrow-visible .platforms-carousel-arrow.is-next,
 .platforms-carousel:has(:focus-visible) .platforms-carousel-arrow {
   opacity: 1;
   visibility: visible;
@@ -2047,14 +2048,15 @@ button:focus-visible {
 .platforms-carousel-arrow.is-prev { transform: translateX(-8px) scale(1); }
 .platforms-carousel-arrow.is-next { transform: translateX(8px) scale(1); }
 
-.platforms-carousel.is-arrows-visible .platforms-carousel-arrow.is-prev,
+.platforms-carousel.is-prev-arrow-visible .platforms-carousel-arrow.is-prev,
 .platforms-carousel:has(:focus-visible) .platforms-carousel-arrow.is-prev,
-.platforms-carousel.is-arrows-visible .platforms-carousel-arrow.is-next,
+.platforms-carousel.is-next-arrow-visible .platforms-carousel-arrow.is-next,
 .platforms-carousel:has(:focus-visible) .platforms-carousel-arrow.is-next {
   transform: translateX(0) scale(1);
 }
 
-.platforms-carousel.is-arrows-visible .platforms-carousel-arrow:hover,
+.platforms-carousel.is-prev-arrow-visible .platforms-carousel-arrow.is-prev:hover,
+.platforms-carousel.is-next-arrow-visible .platforms-carousel-arrow.is-next:hover,
 .platforms-carousel:has(:focus-visible) .platforms-carousel-arrow:hover {
   transform: translateX(0) scale(1.05);
 }
