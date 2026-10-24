@@ -55,7 +55,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!platformCards.length) return;
 
       const step = 360 / platformCards.length;
-      const radius = Math.min(430, Math.max(230, platformsViewport.clientWidth * 0.43));
+      // Size the ring from the card width so neighboring cards keep a visible gap.
+      // The chord between adjacent cards is 2 * radius * sin(step / 2).
+      const cardWidth = platformCards[0]?.getBoundingClientRect().width || 260;
+      const gap = 28;
+      const radiusForGap = (cardWidth + gap) / (2 * Math.sin((step * Math.PI) / 360));
+      const radius = Math.max(230, Math.min(560, radiusForGap));
 
       // Keep each card fixed on the 3D ring and rotate the ring as one unit.
       // This avoids per-card transform/stacking-order jumps during animation.
