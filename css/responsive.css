@@ -700,7 +700,8 @@
 }
 
 
-/* --- STRICT EDITORIAL PROJECT LAYOUT: responsive safety --- */
+
+/* --- STRICT PROJECT LAYOUT: responsive safety --- */
 @media (max-width: 768px) {
   .projects-editorial-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
   .projects-editorial-grid > .project-card-primary,
@@ -716,7 +717,8 @@
   .projects-editorial-grid > .project-card-primary .project-visual { min-height: 260px; }
 }
 @media (min-width: 769px) and (max-width: 1024px) {
-  .projects-editorial-grid > .project-card-primary { grid-template-columns: minmax(0, 1.1fr) minmax(240px, .9fr); }
-  .projects-editorial-grid > #projectEduhive { grid-template-columns: minmax(240px, .9fr) minmax(0, 1.1fr); }
-  .projects-editorial-grid > .project-card-half .project-info { padding: 1.25rem; }
+  .projects-editorial-grid > .project-card-primary { grid-template-columns: minmax(220px, .9fr) minmax(0, 1.35fr); }
+  .projects-editorial-grid > #projectEduhive { grid-template-columns: minmax(0, 1.35fr) minmax(220px, .9fr); }
+  .project-card-stacked .project-half-header,
+  .project-card-stacked .project-half-content { padding: 1.25rem; }
 }
