@@ -661,8 +661,8 @@
     height: 38px;
   }
 
-  .platforms-carousel-arrow.is-prev { left: -0.25rem; }
-  .platforms-carousel-arrow.is-next { right: -0.25rem; }
+  .platforms-carousel-arrow.is-prev { left: 0.25rem; }
+  .platforms-carousel-arrow.is-next { right: 0.25rem; }
 
   .platforms-carousel-pagination {
     margin-top: 0.85rem;
