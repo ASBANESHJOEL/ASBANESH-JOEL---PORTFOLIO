@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!count) return;
 
       const step = 360 / count;
-      const cardWidth = platformCards[0].getBoundingClientRect().width || 340;
+      // offsetWidth is the untransformed layout width; getBoundingClientRect() changes with 3D perspective.
+      const cardWidth = platformCards[0].offsetWidth || 340;
       const gap = 26;
       // Chord spacing keeps the physical width of each panel plus a real gap
       // around the full ring, instead of clamping the radius and forcing overlap.
