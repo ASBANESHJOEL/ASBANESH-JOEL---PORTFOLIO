@@ -1927,8 +1927,8 @@ button:focus-visible {
 .platforms-carousel-viewport {
   position: relative;
   height: clamp(410px, 42vw, 475px);
-  perspective: 1400px;
-  perspective-origin: 50% 44%;
+  perspective: 1100px;
+  perspective-origin: 50% 46%;
   touch-action: pan-y;
   outline: none;
   user-select: none;
@@ -1961,7 +1961,7 @@ button:focus-visible {
   border: 1px solid rgba(200, 211, 229, 0.24);
   border-radius: 8px;
   background: linear-gradient(155deg, rgba(27, 31, 39, 0.98), rgba(13, 15, 20, 0.99));
-  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 24px 52px rgba(0, 0, 0, 0.22), inset 1px 0 0 rgba(238, 242, 249, 0.06);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
@@ -1973,7 +1973,7 @@ button:focus-visible {
 #platformsCarouselTrack .platform-card.is-active {
   border-color: rgba(232, 238, 248, 0.82);
   background: linear-gradient(155deg, #202631, #101319 78%);
-  box-shadow: 0 0 0 1px rgba(220, 230, 245, 0.1), 0 22px 52px rgba(0, 0, 0, 0.38);
+  box-shadow: 0 0 0 1px rgba(220, 230, 245, 0.1), 0 30px 68px rgba(0, 0, 0, 0.34), inset 1px 0 0 rgba(238, 242, 249, 0.08);
 }
 
 #platformsCarouselTrack .platform-card:hover {
