@@ -867,7 +867,12 @@
         <span class="section-label">PRACTICAL STACK</span>
         <h2 class="section-heading">TECHNOLOGIES &amp; PLATFORMS</h2>
 
-        <div class="platforms-grid">
+        <div class="platforms-carousel" id="platformsCarousel">
+          <button class="platforms-carousel-arrow is-prev" type="button" aria-label="Show previous technology" data-carousel-prev>
+            <span aria-hidden="true">←</span>
+          </button>
+          <div class="platforms-carousel-viewport" id="platformsCarouselViewport" tabindex="0" aria-label="Technology cards carousel. Use left and right arrow keys to rotate.">
+            <div class="platforms-grid" id="platformsCarouselTrack">
           <!-- Python -->
           <div class="platform-card fade-in-up">
             <div class="platform-card-top">
@@ -993,6 +998,13 @@
             <h3 class="platform-name">MongoDB</h3>
             <p class="platform-usage">NoSQL document database design, flexible collection schemas, and unstructured data storage for applications.</p>
           </div>
+            </div>
+          </div>
+          <button class="platforms-carousel-arrow is-next" type="button" aria-label="Show next technology" data-carousel-next>
+            <span aria-hidden="true">→</span>
+          </button>
+          <div class="platforms-carousel-pagination" id="platformsCarouselPagination" aria-label="Choose a technology"></div>
+          <p class="platforms-carousel-hint">Drag to rotate <span aria-hidden="true">·</span> Use arrows <span aria-hidden="true">·</span> Swipe on mobile</p>
         </div>
       </div>
     </section>
