@@ -698,3 +698,25 @@
     transform: none;
   }
 }
+
+
+/* --- STRICT EDITORIAL PROJECT LAYOUT: responsive safety --- */
+@media (max-width: 768px) {
+  .projects-editorial-grid { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .projects-editorial-grid > .project-card-primary,
+  .projects-editorial-grid > #projectEduhive {
+    grid-column: 1 / -1;
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .projects-editorial-grid > #projectLifeLink .project-visual,
+  .projects-editorial-grid > #projectEduhive .project-visual { order: 0; }
+  .projects-editorial-grid > #projectLifeLink .project-info,
+  .projects-editorial-grid > #projectEduhive .project-info { order: 1; }
+  .projects-editorial-grid > .project-card-half { grid-column: 1 / -1; }
+  .projects-editorial-grid > .project-card-primary .project-visual { min-height: 260px; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projects-editorial-grid > .project-card-primary { grid-template-columns: minmax(0, 1.1fr) minmax(240px, .9fr); }
+  .projects-editorial-grid > #projectEduhive { grid-template-columns: minmax(240px, .9fr) minmax(0, 1.1fr); }
+  .projects-editorial-grid > .project-card-half .project-info { padding: 1.25rem; }
+}
