@@ -632,14 +632,6 @@
 }
 
 @media (max-width: 600px) {
-  /* Touchscreens have no hover edge, so keep navigation arrows available. */
-  .platforms-carousel-arrow {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transform: none;
-  }
-
   .platforms-carousel {
     margin-top: 1.5rem;
     padding: 0 0 0.5rem;
@@ -691,5 +683,18 @@
     width: min(82vw, 250px);
     height: 305px;
     padding: 1.2rem;
+  }
+}
+
+
+/* Touch-first devices (including tablets and touch laptops) have no reliable hover edge. */
+@media (hover: none), (pointer: coarse) {
+  .platforms-carousel .platforms-carousel-arrow,
+  .platforms-carousel .platforms-carousel-arrow.is-prev,
+  .platforms-carousel .platforms-carousel-arrow.is-next {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
   }
 }
