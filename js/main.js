@@ -120,21 +120,22 @@ document.addEventListener('DOMContentLoaded', () => {
     previousButton?.addEventListener('click', () => advancePlatform(-1));
     nextButton?.addEventListener('click', () => advancePlatform(1));
 
-    // The reveal zones cover the entire blank space on both sides of the carousel,
-    // so arrows stay visible while the pointer travels from the edge zone to the buttons.
-    const edgeRevealWidth = 220;
+    // Use the full-width section as the hover surface, not just the carousel box.
+    // The left and right white gutters are independent activation zones.
+    const edgeRevealWidth = 260;
     const updateArrowVisibility = (event) => {
       if (event.pointerType !== 'mouse') return;
-      const bounds = platformsCarousel.getBoundingClientRect();
-      const nearEdge = event.clientX - bounds.left <= edgeRevealWidth
-        || bounds.right - event.clientX <= edgeRevealWidth;
-      platformsCarousel.classList.toggle('is-arrows-visible', nearEdge);
+      const viewportBounds = platformsViewport.getBoundingClientRect();
+      const inLeftZone = event.clientX <= viewportBounds.left + edgeRevealWidth;
+      const inRightZone = event.clientX >= viewportBounds.right - edgeRevealWidth;
+      platformsCarousel.classList.toggle('is-prev-arrow-visible', inLeftZone);
+      platformsCarousel.classList.toggle('is-next-arrow-visible', inRightZone);
     };
 
-    platformsCarousel.addEventListener('pointerenter', updateArrowVisibility);
-    platformsCarousel.addEventListener('pointermove', updateArrowVisibility);
-    platformsCarousel.addEventListener('pointerleave', () => {
-      platformsCarousel.classList.remove('is-arrows-visible');
+    platformsSection.addEventListener('pointerenter', updateArrowVisibility);
+    platformsSection.addEventListener('pointermove', updateArrowVisibility);
+    platformsSection.addEventListener('pointerleave', () => {
+      platformsCarousel.classList.remove('is-prev-arrow-visible', 'is-next-arrow-visible');
     });
 
     platformsViewport.addEventListener('keydown', (event) => {
