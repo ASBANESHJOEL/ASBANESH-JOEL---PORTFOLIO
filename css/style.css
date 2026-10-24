@@ -1918,14 +1918,15 @@ button:focus-visible {
   --carousel-muted: #aeb5c0;
   --carousel-line: rgba(218, 225, 236, 0.2);
   position: relative;
-  margin-top: 2.75rem;
+  /* Give the section heading clear breathing room above the 3D cards. */
+  margin-top: 4.25rem;
   padding: 0 2.75rem 0.5rem;
   color: var(--carousel-ink);
 }
 
 .platforms-carousel-viewport {
   position: relative;
-  height: clamp(370px, 39vw, 440px);
+  height: clamp(410px, 42vw, 475px);
   perspective: 1400px;
   perspective-origin: 50% 44%;
   touch-action: pan-y;
@@ -2013,7 +2014,7 @@ button:focus-visible {
 .platforms-carousel-arrow {
   position: absolute;
   z-index: 5;
-  top: 43%;
+  top: 47%;
   display: grid;
   place-items: center;
   width: 42px;
