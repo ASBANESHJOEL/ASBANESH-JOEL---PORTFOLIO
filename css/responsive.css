@@ -730,3 +730,94 @@
     grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr) !important;
   }
 }
+
+
+/* --- MOBILE 3D TECHNOLOGY CAROUSEL: keep the active card inside the viewport ---
+   Scoped only to the technology carousel; desktop and project cards are unchanged. */
+@media (max-width: 600px) {
+  .platforms-carousel {
+    width: 100%;
+    max-width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+    overflow: clip;
+  }
+
+  .platforms-carousel-viewport {
+    width: 100%;
+    max-width: 100%;
+    height: 345px;
+    perspective: 1800px;
+    perspective-origin: 50% 45%;
+    overflow: hidden;
+  }
+
+  #platformsCarouselTrack .platform-card {
+    box-sizing: border-box;
+    width: min(68vw, 230px);
+    min-width: 0;
+    height: 300px;
+    padding: 1.1rem;
+    top: 16px;
+  }
+
+  #platformsCarouselTrack .platform-card-top {
+    gap: .65rem;
+    margin-bottom: 1rem;
+  }
+
+  #platformsCarouselTrack .platform-icon-wrap {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  #platformsCarouselTrack .platform-name {
+    font-size: clamp(1.15rem, 5vw, 1.45rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  #platformsCarouselTrack .platform-usage {
+    font-size: clamp(.76rem, 3.2vw, .86rem);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  #platformsCarouselTrack .platform-pill {
+    max-width: 48%;
+    font-size: .56rem;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .platforms-carousel-arrow.is-prev { left: .35rem; }
+  .platforms-carousel-arrow.is-next { right: .35rem; }
+}
+
+@media (max-width: 360px) {
+  .platforms-carousel-viewport {
+    height: 325px;
+    perspective: 1900px;
+  }
+
+  #platformsCarouselTrack .platform-card {
+    width: min(66vw, 205px);
+    height: 285px;
+    padding: .95rem;
+  }
+
+  #platformsCarouselTrack .platform-icon-wrap {
+    width: 36px;
+    height: 36px;
+    flex-basis: 36px;
+  }
+
+  #platformsCarouselTrack .platform-name {
+    font-size: 1.1rem;
+  }
+
+  #platformsCarouselTrack .platform-usage {
+    font-size: .74rem;
+  }
+}
