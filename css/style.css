@@ -2436,3 +2436,72 @@ button:focus-visible {
 }
 .projects-editorial-grid > .project-card-stacked .project-visual .diagram-connector { background: #777; }
 .projects-editorial-grid > .project-card-stacked .project-visual .diagram-connector::after { color: #aaa; }
+
+
+/* --- FINAL PRIMARY CARD FIX: readable white content panels and balanced split ---
+   Intentionally scoped to Projects 01 and 02 only. Projects 03 and 04 are untouched. */
+.projects-editorial-grid > #projectLifeLink {
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr) !important;
+}
+.projects-editorial-grid > #projectEduhive {
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, .9fr) !important;
+}
+
+/* Project 01: white content/info left, narrower black visual right */
+.projects-editorial-grid > #projectLifeLink > .project-info {
+  order: 0;
+  background: #f7f8fa !important;
+  color: #111 !important;
+}
+#projectLifeLink .project-info .project-category-tag { color: #5e6878 !important; }
+#projectLifeLink .project-info .project-title { color: #08090b !important; }
+#projectLifeLink .project-info .project-desc,
+#projectLifeLink .project-info .contribution-text { color: #374151 !important; }
+#projectLifeLink .project-info .contribution-label { color: #111 !important; }
+#projectLifeLink .project-info .project-contribution-box {
+  background: #fff !important;
+  border: 1px solid #e0e3e8 !important;
+  border-left: 3px solid #111 !important;
+}
+#projectLifeLink .project-info .tech-tag {
+  color: #222 !important;
+  background: #fff !important;
+  border-color: #dfe3e8 !important;
+}
+#projectLifeLink .project-info .project-links { border-color: #e5e7eb !important; }
+#projectLifeLink .project-info .project-link-btn { color: #111 !important; }
+#projectLifeLink .project-info .project-link-btn.primary {
+  background: #08090b !important;
+  color: #fff !important;
+  border-color: #08090b !important;
+}
+
+/* Project 02: narrower black visual left, wider white content/info right */
+.projects-editorial-grid > #projectEduhive > .project-visual { order: 0; }
+.projects-editorial-grid > #projectEduhive > .project-info {
+  order: 1;
+  background: #f7f8fa !important;
+  color: #111 !important;
+}
+#projectEduhive .project-info .project-category-tag { color: #5e6878 !important; }
+#projectEduhive .project-info .project-title { color: #08090b !important; }
+#projectEduhive .project-info .project-desc,
+#projectEduhive .project-info .contribution-text { color: #374151 !important; }
+#projectEduhive .project-info .contribution-label { color: #111 !important; }
+#projectEduhive .project-info .project-contribution-box {
+  background: #fff !important;
+  border: 1px solid #e0e3e8 !important;
+  border-left: 3px solid #111 !important;
+}
+#projectEduhive .project-info .tech-tag {
+  color: #222 !important;
+  background: #fff !important;
+  border-color: #dfe3e8 !important;
+}
+#projectEduhive .project-info .project-links { border-color: #e5e7eb !important; }
+#projectEduhive .project-info .project-link-btn { color: #111 !important; }
+#projectEduhive .project-info .project-link-btn.primary {
+  background: #08090b !important;
+  color: #fff !important;
+  border-color: #08090b !important;
+}
