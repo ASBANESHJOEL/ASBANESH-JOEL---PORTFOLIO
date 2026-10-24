@@ -1927,7 +1927,8 @@ button:focus-visible {
 .platforms-carousel-viewport {
   position: relative;
   height: clamp(410px, 42vw, 475px);
-  perspective: 1100px;
+  /* A longer camera distance prevents the front card from ballooning as it moves toward the viewer. */
+  perspective: 1900px;
   perspective-origin: 50% 46%;
   touch-action: pan-y;
   outline: none;
