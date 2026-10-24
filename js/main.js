@@ -120,16 +120,19 @@ document.addEventListener('DOMContentLoaded', () => {
     previousButton?.addEventListener('click', () => advancePlatform(-1));
     nextButton?.addEventListener('click', () => advancePlatform(1));
 
-    // Reveal navigation near the edges of the whole carousel, including the arrow gutters.
-    const edgeRevealWidth = 160;
-    platformsCarousel.addEventListener('pointermove', (event) => {
+    // The reveal zones cover the entire blank space on both sides of the carousel,
+    // so arrows stay visible while the pointer travels from the edge zone to the buttons.
+    const edgeRevealWidth = 220;
+    const updateArrowVisibility = (event) => {
       if (event.pointerType !== 'mouse') return;
       const bounds = platformsCarousel.getBoundingClientRect();
       const nearEdge = event.clientX - bounds.left <= edgeRevealWidth
         || bounds.right - event.clientX <= edgeRevealWidth;
       platformsCarousel.classList.toggle('is-arrows-visible', nearEdge);
-    });
+    };
 
+    platformsCarousel.addEventListener('pointerenter', updateArrowVisibility);
+    platformsCarousel.addEventListener('pointermove', updateArrowVisibility);
     platformsCarousel.addEventListener('pointerleave', () => {
       platformsCarousel.classList.remove('is-arrows-visible');
     });
