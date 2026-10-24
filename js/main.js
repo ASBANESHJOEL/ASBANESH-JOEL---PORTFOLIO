@@ -45,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const previousButton = platformsCarousel.querySelector('[data-carousel-prev]');
     const nextButton = platformsCarousel.querySelector('[data-carousel-next]');
     let activePlatformIndex = 0;
+    // Monotonic step count keeps the ring rotating in one direction across the last/first boundary.
+    let rotationStepCount = 0;
     let pointerStartX = null;
     let pointerStartY = null;
     let pointerMoved = false;
@@ -63,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${platformCards.length}`);
       });
 
-      platformsTrack.style.transform = `rotateY(${-activePlatformIndex * step}deg)`;
+      platformsTrack.style.transform = `rotateY(${-rotationStepCount * step}deg)`;
 
       platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
         if (index === activePlatformIndex) {
@@ -74,9 +76,22 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     };
 
-    const goToPlatform = (index) => {
-      activePlatformIndex = (index + platformCards.length) % platformCards.length;
+    const advancePlatform = (direction) => {
+      if (!platformCards.length) return;
+      rotationStepCount += direction;
+      activePlatformIndex = (activePlatformIndex + direction + platformCards.length) % platformCards.length;
       renderPlatformCarousel();
+    };
+
+    const goToPlatform = (index) => {
+      const count = platformCards.length;
+      if (!count) return;
+      const targetIndex = (index + count) % count;
+      // Direct selections use the shortest route; next/previous controls use advancePlatform
+      // so moving past the last card never snaps the ring back to its starting angle.
+      const forward = (targetIndex - activePlatformIndex + count) % count;
+      const direction = forward <= count / 2 ? forward : forward - count;
+      advancePlatform(direction);
     };
 
     platformCards.forEach((card, index) => {
@@ -92,16 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    previousButton?.addEventListener('click', () => goToPlatform(activePlatformIndex - 1));
-    nextButton?.addEventListener('click', () => goToPlatform(activePlatformIndex + 1));
+    previousButton?.addEventListener('click', () => advancePlatform(-1));
+    nextButton?.addEventListener('click', () => advancePlatform(1));
 
     platformsViewport.addEventListener('keydown', (event) => {
       if (event.key === 'ArrowLeft') {
         event.preventDefault();
-        goToPlatform(activePlatformIndex - 1);
+        advancePlatform(-1);
       } else if (event.key === 'ArrowRight') {
         event.preventDefault();
-        goToPlatform(activePlatformIndex + 1);
+        advancePlatform(1);
       } else if (event.key === 'Home') {
         event.preventDefault();
         goToPlatform(0);
@@ -124,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const deltaY = event.clientY - pointerStartY;
       if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
         pointerMoved = true;
-        goToPlatform(activePlatformIndex + (deltaX < 0 ? 1 : -1));
+        advancePlatform(deltaX < 0 ? 1 : -1);
       }
       pointerStartX = null;
       pointerStartY = null;
