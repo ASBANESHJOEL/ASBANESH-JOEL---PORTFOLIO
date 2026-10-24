@@ -33,6 +33,126 @@ document.addEventListener('DOMContentLoaded', () => {
   const certButtons = document.querySelectorAll('.cert-view-btn');
 
   /* ==========================================
+     0. TECHNOLOGIES 3D CAROUSEL
+     ========================================== */
+  const platformsCarousel = document.getElementById('platformsCarousel');
+  const platformsViewport = document.getElementById('platformsCarouselViewport');
+  const platformsTrack = document.getElementById('platformsCarouselTrack');
+  const platformsPagination = document.getElementById('platformsCarouselPagination');
+
+  if (platformsCarousel && platformsViewport && platformsTrack && platformsPagination) {
+    const platformCards = Array.from(platformsTrack.querySelectorAll('.platform-card'));
+    const previousButton = platformsCarousel.querySelector('[data-carousel-prev]');
+    const nextButton = platformsCarousel.querySelector('[data-carousel-next]');
+    let activePlatformIndex = 0;
+    let pointerStartX = null;
+    let pointerStartY = null;
+    let pointerMoved = false;
+
+    const getShortestOffset = (index) => {
+      const count = platformCards.length;
+      return ((index - activePlatformIndex + count + count / 2) % count + count) % count - count / 2;
+    };
+
+    const renderPlatformCarousel = () => {
+      if (!platformCards.length) return;
+
+      const step = 360 / platformCards.length;
+      const radius = Math.min(430, Math.max(230, platformsViewport.clientWidth * 0.43));
+
+      platformCards.forEach((card, index) => {
+        const offset = getShortestOffset(index);
+        const angle = offset * step;
+        card.style.transform = `translateX(-50%) rotateY(${angle}deg) translateZ(${radius}px)`;
+        card.style.zIndex = String(20 - Math.round(Math.abs(offset)));
+        card.classList.toggle('is-active', index === activePlatformIndex);
+        card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${platformCards.length}`);
+      });
+
+      platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
+        if (index === activePlatformIndex) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const goToPlatform = (index) => {
+      activePlatformIndex = (index + platformCards.length) % platformCards.length;
+      renderPlatformCarousel();
+    };
+
+    platformCards.forEach((card, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'platforms-carousel-dot';
+      dot.setAttribute('aria-label', `Show ${card.querySelector('.platform-name')?.textContent.trim() || 'technology'}`);
+      dot.addEventListener('click', () => goToPlatform(index));
+      platformsPagination.appendChild(dot);
+
+      card.addEventListener('click', () => {
+        if (index !== activePlatformIndex) goToPlatform(index);
+      });
+    });
+
+    previousButton?.addEventListener('click', () => goToPlatform(activePlatformIndex - 1));
+    nextButton?.addEventListener('click', () => goToPlatform(activePlatformIndex + 1));
+
+    platformsViewport.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        goToPlatform(activePlatformIndex - 1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        goToPlatform(activePlatformIndex + 1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        goToPlatform(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        goToPlatform(platformCards.length - 1);
+      }
+    });
+
+    platformsViewport.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      pointerMoved = false;
+    });
+
+    platformsViewport.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null) return;
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+        pointerMoved = true;
+        goToPlatform(activePlatformIndex + (deltaX < 0 ? 1 : -1));
+      }
+      pointerStartX = null;
+      pointerStartY = null;
+    });
+
+    platformsViewport.addEventListener('pointercancel', () => {
+      pointerStartX = null;
+      pointerStartY = null;
+    });
+
+    platformsViewport.addEventListener('click', (event) => {
+      if (pointerMoved) {
+        event.preventDefault();
+        event.stopPropagation();
+        pointerMoved = false;
+      }
+    }, true);
+
+    window.addEventListener('resize', renderPlatformCarousel, { passive: true });
+    renderPlatformCarousel();
+  }
+
+
+  /* ==========================================
      1. SCROLL & HEADER STATE
      ========================================== */
   const handleScroll = () => {
