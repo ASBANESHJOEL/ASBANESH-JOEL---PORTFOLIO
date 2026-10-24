@@ -841,6 +841,21 @@ button:focus-visible {
   grid-column: span 6;
 }
 
+/* Editorial selected-work layout: alternating featured cards followed by two compact cards. */
+.project-card-featured { grid-template-columns: minmax(0, 1fr) minmax(0, 1.03fr); min-height: 390px; }
+.project-card-featured-info-left .project-info { grid-column: 1; grid-row: 1; }
+.project-card-featured-info-left .project-visual { grid-column: 2; grid-row: 1; }
+.project-card-featured-info-right .project-visual { grid-column: 1; grid-row: 1; }
+.project-card-featured-info-right .project-info { grid-column: 2; grid-row: 1; }
+.project-card-compact { display: flex; flex-direction: column; min-height: 100%; }
+.project-card-compact .project-visual { order: -1; min-height: 220px; padding: 1.5rem; }
+.project-card-compact .project-info { flex: 1; padding: 1.5rem; }
+.project-card-compact .project-title { font-size: clamp(1.15rem, 1.5vw, 1.5rem); margin-bottom: 0.75rem; }
+.project-card-compact .project-desc { font-size: 0.875rem; margin-bottom: 1rem; }
+.project-card-compact .project-tech-tags { gap: 0.4rem; }
+.project-card-compact .project-links { margin-top: 1.25rem; }
+
+
 /* Card Visual Container */
 .project-visual {
   position: relative;
