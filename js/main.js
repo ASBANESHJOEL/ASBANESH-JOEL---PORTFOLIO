@@ -54,8 +54,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!count) return;
 
       const viewportWidth = platformsViewport.clientWidth;
-      const cardWidth = Math.min(285, Math.max(225, viewportWidth * 0.23));
-      const sideOffset = Math.min(cardWidth * 0.98, viewportWidth * 0.34);
+      const cardWidth = platformCards[0].getBoundingClientRect().width || Math.min(340, Math.max(260, viewportWidth * 0.27));
+      const sideOffset = Math.min(cardWidth * 0.9 + 22, viewportWidth * 0.36);
 
       platformCards.forEach((card, index) => {
         // Only render the active card and its immediate neighbors. A 10-face
