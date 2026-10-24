@@ -2071,8 +2071,9 @@ button:focus-visible {
   outline-offset: 3px;
 }
 
-.platforms-carousel-arrow.is-prev { left: -1.25rem; }
-.platforms-carousel-arrow.is-next { right: -1.25rem; }
+/* Put the controls clearly beyond the card silhouette, not on the outer panels. */
+.platforms-carousel-arrow.is-prev { left: -3.75rem; }
+.platforms-carousel-arrow.is-next { right: -3.75rem; }
 
 .platforms-carousel-pagination {
   display: flex;
