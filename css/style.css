@@ -1965,7 +1965,7 @@ button:focus-visible {
   -webkit-backface-visibility: hidden;
   transform-style: preserve-3d;
   opacity: 1;
-  transition: border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1), border-color 300ms ease, box-shadow 300ms ease, background-color 300ms ease;
 }
 
 #platformsCarouselTrack .platform-card.is-active {
