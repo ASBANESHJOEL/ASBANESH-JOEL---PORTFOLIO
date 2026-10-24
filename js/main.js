@@ -33,6 +33,166 @@ document.addEventListener('DOMContentLoaded', () => {
   const certButtons = document.querySelectorAll('.cert-view-btn');
 
   /* ==========================================
+     0. TECHNOLOGIES 3D CAROUSEL
+     ========================================== */
+  const platformsSection = document.getElementById('platforms');
+  const platformsCarousel = document.getElementById('platformsCarousel');
+  const platformsViewport = document.getElementById('platformsCarouselViewport');
+  const platformsTrack = document.getElementById('platformsCarouselTrack');
+  const platformsPagination = document.getElementById('platformsCarouselPagination');
+
+  if (platformsCarousel && platformsViewport && platformsTrack && platformsPagination) {
+    const platformCards = Array.from(platformsTrack.querySelectorAll('.platform-card'));
+    const previousButton = platformsCarousel.querySelector('[data-carousel-prev]');
+    const nextButton = platformsCarousel.querySelector('[data-carousel-next]');
+    let activePlatformIndex = 0;
+    let rotationStepCount = 0;
+    let pointerStartX = null;
+    let pointerStartY = null;
+    let pointerMoved = false;
+
+    const renderPlatformCarousel = () => {
+      const count = platformCards.length;
+      if (!count) return;
+
+      const step = 360 / count;
+      // offsetWidth is the untransformed layout width; getBoundingClientRect() changes with 3D perspective.
+      const cardWidth = platformCards[0].offsetWidth || 340;
+      const gap = 26;
+      // Chord spacing keeps the physical width of each panel plus a real gap
+      // around the full ring, instead of clamping the radius and forcing overlap.
+      const radius = Math.max(300, (cardWidth + gap) / (2 * Math.sin((step * Math.PI) / 360)));
+
+      platformCards.forEach((card, index) => {
+        card.style.transform = `translateX(-50%) rotateY(${index * step}deg) translateZ(${radius}px)`;
+        card.style.opacity = '1';
+        card.style.visibility = 'visible';
+        card.style.pointerEvents = 'auto';
+        card.style.zIndex = 'auto';
+        card.classList.toggle('is-active', index === activePlatformIndex);
+        card.setAttribute('aria-hidden', 'false');
+        card.setAttribute('aria-label', `${card.querySelector('.platform-name')?.textContent.trim() || 'Technology'}, ${index + 1} of ${count}`);
+      });
+
+      // Rotate the entire ring as one object. Keep the accumulated angle so
+      // crossing the last/first card never resets the animation to zero.
+      platformsTrack.style.transform = `rotateY(${-rotationStepCount * step}deg)`;
+
+      platformsPagination.querySelectorAll('.platforms-carousel-dot').forEach((dot, index) => {
+        if (index === activePlatformIndex) {
+          dot.setAttribute('aria-current', 'true');
+        } else {
+          dot.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const advancePlatform = (direction) => {
+      if (!platformCards.length) return;
+      rotationStepCount += direction;
+      activePlatformIndex = (activePlatformIndex + direction + platformCards.length) % platformCards.length;
+      renderPlatformCarousel();
+    };
+
+    const goToPlatform = (index) => {
+      const count = platformCards.length;
+      if (!count) return;
+      const targetIndex = (index + count) % count;
+      // Direct selections use the shortest route; next/previous controls use advancePlatform
+      // so moving past the last card never snaps the ring back to its starting angle.
+      const forward = (targetIndex - activePlatformIndex + count) % count;
+      const direction = forward <= count / 2 ? forward : forward - count;
+      advancePlatform(direction);
+    };
+
+    platformCards.forEach((card, index) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'platforms-carousel-dot';
+      dot.setAttribute('aria-label', `Show ${card.querySelector('.platform-name')?.textContent.trim() || 'technology'}`);
+      dot.addEventListener('click', () => goToPlatform(index));
+      platformsPagination.appendChild(dot);
+
+      card.addEventListener('click', () => {
+        if (index !== activePlatformIndex) goToPlatform(index);
+      });
+    });
+
+    previousButton?.addEventListener('click', () => advancePlatform(-1));
+    nextButton?.addEventListener('click', () => advancePlatform(1));
+
+    // Use the full-width section as the hover surface, not just the carousel box.
+    // The left and right white gutters are independent activation zones.
+    const edgeRevealWidth = 260;
+    const updateArrowVisibility = (event) => {
+      if (event.pointerType !== 'mouse') return;
+      const viewportBounds = platformsViewport.getBoundingClientRect();
+      const inLeftZone = event.clientX <= viewportBounds.left + edgeRevealWidth;
+      const inRightZone = event.clientX >= viewportBounds.right - edgeRevealWidth;
+      platformsCarousel.classList.toggle('is-prev-arrow-visible', inLeftZone);
+      platformsCarousel.classList.toggle('is-next-arrow-visible', inRightZone);
+    };
+
+    platformsSection.addEventListener('pointerenter', updateArrowVisibility);
+    platformsSection.addEventListener('pointermove', updateArrowVisibility);
+    platformsSection.addEventListener('pointerleave', () => {
+      platformsCarousel.classList.remove('is-prev-arrow-visible', 'is-next-arrow-visible');
+    });
+
+    platformsViewport.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        advancePlatform(-1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        advancePlatform(1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        goToPlatform(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        goToPlatform(platformCards.length - 1);
+      }
+    });
+
+    platformsViewport.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      pointerMoved = false;
+    });
+
+    platformsViewport.addEventListener('pointerup', (event) => {
+      if (pointerStartX === null) return;
+      const deltaX = event.clientX - pointerStartX;
+      const deltaY = event.clientY - pointerStartY;
+      if (Math.abs(deltaX) > 35 && Math.abs(deltaX) > Math.abs(deltaY) * 1.15) {
+        pointerMoved = true;
+        advancePlatform(deltaX < 0 ? 1 : -1);
+      }
+      pointerStartX = null;
+      pointerStartY = null;
+    });
+
+    platformsViewport.addEventListener('pointercancel', () => {
+      pointerStartX = null;
+      pointerStartY = null;
+    });
+
+    platformsViewport.addEventListener('click', (event) => {
+      if (pointerMoved) {
+        event.preventDefault();
+        event.stopPropagation();
+        pointerMoved = false;
+      }
+    }, true);
+
+    window.addEventListener('resize', renderPlatformCarousel, { passive: true });
+    renderPlatformCarousel();
+  }
+
+
+  /* ==========================================
      1. SCROLL & HEADER STATE
      ========================================== */
   const handleScroll = () => {
